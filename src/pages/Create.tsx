@@ -13,10 +13,11 @@ import {
   Typography,
 } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useNotes, useNotesActions } from '../store';
 import { Notification } from '../components/Notification';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { NotesApi } from '../services';
 
 export const Create = () => {
   const [title, setTitle] = useState('');
@@ -33,12 +34,20 @@ export const Create = () => {
     },
   };
 
-  const { status, error } = useNotes();
-  const { createNote, resetStatusAndError } = useNotesActions();
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    resetStatusAndError();
-  }, [resetStatusAndError]);
+  const {
+    isPending: isPendingCreate,
+    error: createNoteError,
+    mutate: createNote,
+  } = useMutation<unknown, Error, Parameters<typeof NotesApi.createNote>[0]>({
+    mutationKey: ['createNote'],
+    mutationFn: NotesApi.createNote,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['notes'] });
+      navigate('/');
+    },
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,24 +55,19 @@ export const Create = () => {
     setDetailsError(title == '' ? true : false);
 
     if (title && details) {
-      createNote(title, details, category);
-      navigate('/');
+      createNote({ title, details, category });
     }
   };
 
   return (
     <>
-      {status === 'loading' && (
+      {isPendingCreate && (
         <Box alignContent='center'>
           <CircularProgress sx={{ color: 'black' }} />
         </Box>
       )}
-      {status === 'failed' && (
-        <Notification
-          isOpen={status === 'failed'}
-          message={error!}
-          type='error'
-        />
+      {createNoteError && (
+        <Notification message={createNoteError.message} type='error' />
       )}
       <Typography
         variant='h6'

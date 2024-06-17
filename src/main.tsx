@@ -5,16 +5,18 @@ import './styles.css';
 import { router } from './router';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from './theme';
-import { /*ContextToolsProvider, */ NotesProvider } from './store';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    {/* <ContextToolsProvider name='Ninja Notes'> */}
     <ThemeProvider theme={theme}>
-      <NotesProvider>
+      <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
-      </NotesProvider>
+        <ReactQueryDevtools />
+      </QueryClientProvider>
     </ThemeProvider>
-    {/* </ContextToolsProvider> */}
   </React.StrictMode>
 );

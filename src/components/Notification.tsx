@@ -4,7 +4,6 @@ import { FC } from 'react';
 type NotificationProps = {
   message: string;
   type: 'success' | 'error' | 'warning';
-  isOpen: boolean;
 };
 
 export const Notification: FC<NotificationProps> = ({ message, type }) => {
