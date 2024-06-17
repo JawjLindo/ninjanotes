@@ -1,0 +1,1 @@
+export { getNextHighestIntFromArray } from './getNextHighestIntFromArray';
