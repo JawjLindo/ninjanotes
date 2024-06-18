@@ -1,30 +1,12 @@
-# React + TypeScript + Vite
+# Net Ninja's Material UI Tutorial Updated
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is based on the [Net Ninja Material UI tutorial](https://www.youtube.com/watch?v=0KEpWHtG10M&list=PL4cUxeGkcC9gjxLvV4VEkZ6H6H4yWuS58&ab_channel=NetNinja)
 
-Currently, two official plugins are available:
+## Differences
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Created the project in vite using yarn with `yarn create vite <project> --template react-swc-ts`. This creates a new React project using TypeScript.
+- Used Material UI v5.
+- Used Tanstack Query v5 for state management and querying.
+- Used react-hook-form v7 for creating a new note.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+_This is not an absolutely ideal layout of the project and way to implement but I wanted to provide this as an update to those who are/were curious._
