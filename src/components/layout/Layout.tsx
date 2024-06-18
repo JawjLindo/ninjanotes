@@ -4,9 +4,14 @@ import { Header } from './Header';
 import { Box, Container } from '@mui/material';
 import { Sidebar } from './Sidebar';
 import { useTheme } from '@mui/material';
+import { useEffect } from 'react';
 
 export const Layout = () => {
   const theme = useTheme();
+
+  useEffect(() => {
+    document.title = 'Ninja Notes';
+  }, []);
 
   return (
     <Box
